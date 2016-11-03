@@ -6,50 +6,51 @@ class PagesController < ApplicationController
 
   # Função para buscar os melhores jogadores baseado nas informações disponíveis no Banco de Dados
   def cartola_suggestions
-    if Player.count == 0:
+    if Player.count == 0
       flash[:alert] = "O banco de dados não está atualizado. Retorne mais tarde."
       redirect_to(:action => 'index')
+    else
+      # Garante que o preço total do time não ultrapassará o orçamento inicial de 100 cartoletas
+      max_price = 100.0 / 12.0
 
-    # Garante que o preço total do time não ultrapassará o orçamento inicial de 100 cartoletas
-    max_price = 100.0 / 12.0
+      # Seleciona os 10 melhores jogadores de cada posição, ordenando pelo campo de score_per_price (decrescente). Seleção (arbitrária)
+      # de jogadores com score > 2
+      @best_midfielders = Player.where("position = 'Meia' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
+      @best_centre_backs = Player.where("position = 'Zagueiro' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
+      @best_full_backs = Player.where("position = 'Lateral' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
+      @best_goalkeepers = Player.where("position = 'Goleiro' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
+      @best_attackers = Player.where("position = 'Atacante' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
 
-    # Seleciona os 10 melhores jogadores de cada posição, ordenando pelo campo de score_per_price (decrescente). Seleção (arbitrária)
-    # de jogadores com score > 2
-    @best_midfielders = Player.where("position = 'Meia' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
-    @best_centre_backs = Player.where("position = 'Zagueiro' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
-    @best_full_backs = Player.where("position = 'Lateral' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
-    @best_goalkeepers = Player.where("position = 'Goleiro' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
-    @best_attackers = Player.where("position = 'Atacante' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
+      # Criar array para possível escalação
+      @possible_lineup = []
 
-    # Criar array para possível escalação
-    @possible_lineup = []
+      # Adicionar jogadores baseados no maior Score, conforme a quantidade requerida para cada posição
+      @possible_lineup << @best_goalkeepers.sort_by(&:score).reverse.first
 
-    # Adicionar jogadores baseados no maior Score, conforme a quantidade requerida para cada posição
-    @possible_lineup << @best_goalkeepers.sort_by(&:score).reverse.first
+      @best_centre_backs.sort_by(&:score).reverse.first(2).each do |p|
+        @possible_lineup << p
+      end
 
-    @best_centre_backs.sort_by(&:score).reverse.first(2).each do |p|
-      @possible_lineup << p
-    end
+      @best_full_backs.sort_by(&:score).reverse.first(2).each do |p|
+        @possible_lineup << p
+      end
 
-    @best_full_backs.sort_by(&:score).reverse.first(2).each do |p|
-      @possible_lineup << p
-    end
+      @best_midfielders.sort_by(&:score).reverse.first(4).each do |p|
+        @possible_lineup << p
+      end
 
-    @best_midfielders.sort_by(&:score).reverse.first(4).each do |p|
-      @possible_lineup << p
-    end
+      @best_attackers.sort_by(&:score).reverse.first(2).each do |p|
+        @possible_lineup << p
+      end
 
-    @best_attackers.sort_by(&:score).reverse.first(2).each do |p|
-      @possible_lineup << p
-    end
+      # Para o técnico, selecionar o mais barato
+      @possible_lineup << Player.where("position = 'Tecnico'").sort_by(&:price).first
 
-    # Para o técnico, selecionar o mais barato
-    @possible_lineup << Player.where("position = 'Tecnico'").sort_by(&:price).first
-
-    # Calcular soma do valor total da escalação
-    @lineup_value = 0.0
-    @possible_lineup.each do |p|
-      @lineup_value += p.price
+      # Calcular soma do valor total da escalação
+      @lineup_value = 0.0
+      @possible_lineup.each do |p|
+        @lineup_value += p.price
+      end
     end
   end
 
