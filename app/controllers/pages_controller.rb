@@ -16,11 +16,11 @@ class PagesController < ApplicationController
 
       # Seleciona os 10 melhores jogadores de cada posição, ordenando pelo campo de score_per_price (decrescente). Seleção (arbitrária)
       # de jogadores com score > 2
-      @best_midfielders = Player.where("position = 'Meia' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
-      @best_centre_backs = Player.where("position = 'Zagueiro' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
-      @best_full_backs = Player.where("position = 'Lateral' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
-      @best_goalkeepers = Player.where("position = 'Goleiro' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
-      @best_attackers = Player.where("position = 'Atacante' and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
+      @best_midfielders = Player.where("position = 'Meia' and games > 10 and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
+      @best_centre_backs = Player.where("position = 'Zagueiro' and games > 10 and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
+      @best_full_backs = Player.where("position = 'Lateral' and games > 10 and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
+      @best_goalkeepers = Player.where("position = 'Goleiro' and games > 10 and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
+      @best_attackers = Player.where("position = 'Atacante' and games > 10 and score > 2 and price < #{max_price}").sort_by(&:score_per_price).reverse.first(10)
 
       # Criar array para possível escalação
       @possible_lineup = []
