@@ -2,6 +2,8 @@
 
 Este projeto indica sugestões de escalação e jogadores para o jogo Cartola FC. Feito em Rails.
 
+Acesse em: https://sugestoes-cartola.herokuapp.com/
+
 * Login com Facebook (Devise e Omniauth)
 
 * Chamada para API do Cartola e manipulação da resposta em JSON para informações dos jogadores
