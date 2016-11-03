@@ -6,6 +6,10 @@ class PagesController < ApplicationController
 
   # Função para buscar os melhores jogadores baseado nas informações disponíveis no Banco de Dados
   def cartola_suggestions
+    if Player.count == 0:
+      flash[:alert] = "O banco de dados não está atualizado. Retorne mais tarde."
+      redirect_to(:action => 'index')
+
     # Garante que o preço total do time não ultrapassará o orçamento inicial de 100 cartoletas
     max_price = 100.0 / 12.0
 
