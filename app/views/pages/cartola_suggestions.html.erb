@@ -1,0 +1,166 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Sugestões Cartola</h1>
+    <p>Esta página oferecerá sugestões de atletas e escalação no jogo Cartola FC, baseadas em estatísticas oferecidas pelo próprio. </p>
+    <p>Para as posições ofensivas, o Score é calculado com base nos gols, assistências, finalizações, impedimentos etc.</p>
+    <p>Para as posições defensivas, o Score é calculado com base em roubadas de bola, faltas cometidas, defesas e gols sofridos (para os goleiros).</p>
+    <p>O Score de cada jogador é dividido por seu preço, gerando um fator de eficiência. </p>
+    <p>Para os técnicos, por falta de estatísticas, selecionamos o mais barato.</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Possível Escalação</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Posição</th>
+          <th>Score</th>
+          <th>Preço</th>
+          <th>Score / Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @possible_lineup.each do |p| %>
+          <tr>
+            <td><%= p.nickname %></td>
+            <td><%= p.position %></td>
+            <td><%= p.score %></td>
+            <td><%= p.price %></td>
+            <td><%= p.score_per_price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <p><em><strong>Preço Total: C$ <%= @lineup_value %></strong></em></p>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+      <h2>Lista dos Mais Eficientes por Posição</h2>
+  </div>
+
+  <div class="col-md-6">
+    <h3>Goleiros</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Score</th>
+          <th>Preço</th>
+          <th>Score / Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @best_goalkeepers.each do |p| %>
+          <tr>
+            <td><%= p.nickname %></td>
+            <td><%= p.score %></td>
+            <td><%= p.price %></td>
+            <td><%= p.score_per_price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-6">
+    <h3>Zagueiros</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Score</th>
+          <th>Preço</th>
+          <th>Score / Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @best_centre_backs.each do |p| %>
+          <tr>
+            <td><%= p.nickname %></td>
+            <td><%= p.score %></td>
+            <td><%= p.price %></td>
+            <td><%= p.score_per_price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-6">
+    <h3>Laterais</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Score</th>
+          <th>Preço</th>
+          <th>Score / Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @best_full_backs.each do |p| %>
+          <tr>
+            <td><%= p.nickname %></td>
+            <td><%= p.score %></td>
+            <td><%= p.price %></td>
+            <td><%= p.score_per_price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-6">
+    <h3>Meias</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Score</th>
+          <th>Preço</th>
+          <th>Score / Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @best_midfielders.each do |p| %>
+          <tr>
+            <td><%= p.nickname %></td>
+            <td><%= p.score %></td>
+            <td><%= p.price %></td>
+            <td><%= p.score_per_price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-6">
+    <h3>Atacantes</h3>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Score</th>
+          <th>Preço</th>
+          <th>Score / Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @best_attackers.each do |p| %>
+          <tr>
+            <td><%= p.nickname %></td>
+            <td><%= p.score %></td>
+            <td><%= p.price %></td>
+            <td><%= p.score_per_price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

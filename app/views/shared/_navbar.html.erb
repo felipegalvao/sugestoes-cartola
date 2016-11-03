@@ -1,0 +1,28 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Sugestões Cartola</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><%= link_to "Home", :controller => "/pages", :action => "index" %></li>
+        <li><%= link_to "Página de Sugestões", :controller => "/pages", :action => "cartola_suggestions" %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <% if(user_signed_in?) %>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to "Login com Facebook", user_facebook_omniauth_authorize_path %>
+          <% end %>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>

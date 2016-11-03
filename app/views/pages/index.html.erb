@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Sugestões Cartola</h1>
+    <p>Aqui, você receberá sugestões para sua escalação do cartola.</p>
+    <% if(user_signed_in?) %>
+      <p>Você já está logado. Pode prosseguir para a página de sugestões ou fazer logout:</p>
+      <%= link_to "Página de Sugestões", {action: "cartola_suggestions"}, class: "btn btn-primary" %>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
+    <% else %>
+      <p>Faça login com sua conta do Facebook para acessar a página de sugestões:</p>
+      <%= link_to "Login com Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
