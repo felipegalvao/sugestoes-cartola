@@ -6,6 +6,7 @@ class PagesController < ApplicationController
 
   # Função para buscar os melhores jogadores baseado nas informações disponíveis no Banco de Dados
   def cartola_suggestions
+    # Se a contagem de jogadores está em 0 (ou seja, a função update_players ainda não foi rodada uma vez), redirecionar para a página principal
     if Player.count == 0
       flash[:alert] = "O banco de dados não está atualizado. Retorne mais tarde."
       redirect_to(:action => 'index')

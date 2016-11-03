@@ -23,6 +23,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+# Gems para fazer o request para a API do Cartola e manipular o JSON de resposta
 gem 'json'
 gem 'httparty'
 
