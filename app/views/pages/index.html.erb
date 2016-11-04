@@ -7,8 +7,9 @@
       <%= link_to "Página de Sugestões", {action: "cartola_suggestions"}, class: "btn btn-primary" %>
       <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary" %>
     <% else %>
-      <p>Faça login com sua conta do Facebook para acessar a página de sugestões:</p>
-      <%= link_to "Login com Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary" %>
+      <p>Faça login ou cadastre-se para acessar a página de sugestões:</p>
+      <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
+      <%= link_to "Cadastro", new_user_registration_path, class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
